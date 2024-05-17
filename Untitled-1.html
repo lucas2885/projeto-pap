@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registo de Gastos Diarios</title>
+</head>
+<body>
+    <h1>Registo de Gastos Diários</h1>
+    <label for="expense">Valor do Gasto:</label>
+    <input type="text" id="expense" name="expense" required>
+    
+    
+
+    
+    <button onclick="registrarGasto()">Registar</button>
+    <ul id="lista-gastos"></ul>
+    <p id="total-mes">Total do mês: 0</p>
+    
+    
+
+    <script> 
+        let totalMes = 0;
+
+        // Função para registar os gastos
+        function registrarGasto() {
+            const expenseInput = document.getElementById('expense'); // Obter o input do valor do gasto
+            const expenseValue = parseFloat(expenseInput.value); // Obter o valor do gasto como número
+            
+
+             if (!isNaN(expenseValue)) { // Verificar se o valor do gasto é um número válido
+                const listaGastos = document.getElementById('lista-gastos'); // Obter a lista de gastos
+                const data = new Date(); // Obter a data atual
+                const dia = data.getDate(); // Obter o dia do mês atual
+                const novoGasto = document.createElement('li'); // Criar um novo elemento de lista
+                novoGasto.textContent = `Dia ${dia}: ${expenseValue.toFixed(2)}`; // Definir o texto do novo gasto
+                listaGastos.appendChild(novoGasto); // Adicionar o novo gasto à lista
+                totalMes += expenseValue; // Atualizar o total do mês
+                const totalMesElemento = document.getElementById('total-mes'); // Obter o elemento para mostrar o total do mês
+                totalMesElemento.textContent = `Total do mês: ${totalMes.toFixed(2)}`; // Atualizar o texto do total do mês
+                expenseInput.value = ''; // Limpar o campo do valor do gasto
+                
+            } else {
+                alert('Por favor, insira um valor numérico válido.'); // Alerta se o valor do gasto não for válido
+            }
+        }
+    </script> 
+</body>
+</html>
+html
